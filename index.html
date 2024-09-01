@@ -5,49 +5,72 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Countdown</title>
   <style>
-    /* Reset default margin */
-    body {
-      margin: 0; 
-    }
-
-    /* Background styling */
+    /* Styling for the entire body */
     body {
       background: url('MPLASONLINELOGO.png') no-repeat center center fixed;
-      background-size: auto; /* Shows the entire image without cropping */
+      background-size: contain;
       background-position: center;
       background-attachment: fixed;
       display: flex;
-      flex-direction: column;
+      flex-direction: row; /* Arrange elements in a row */
       align-items: center;
-      justify-content: center;
-      height: 100vh; 
+      justify-content: space-between; /* Space elements evenly */
+      height: 100vh;
+      margin: 0;
+      padding: 0;
     }
 
-    /* Text Styling */
+    /* Container for the central content */
+    .container {
+      width: 70%; /* Central content takes 70% of the width */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Side elements with animated gradient */
+    .side {
+      width: 15%; /* Side spaces take 15% each */
+      height: 100%;
+      background: linear-gradient(180deg, rgba(255, 0, 150, 0.2), rgba(0, 204, 255, 0.2));
+      animation: move 10s linear infinite; /* Move the gradient */
+    }
+
+    /* Animation for the moving gradient */
+    @keyframes move {
+      from {
+        background-position: 0 0;
+      }
+      to {
+        background-position: 0 100%;
+      }
+    }
+
+    /* Text styling */
     h1, label {
       font-family: 'Arial', sans-serif;
       color: white;
       text-align: center;
-      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Adds shadow for depth */
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
     }
 
-    /* Custom Gradient Text for the Header */
+    /* Styling for the custom text (Server Launch) */
     h1 label#customText {
-      font-size: 3em; /* Bigger font for the header */
-      background: linear-gradient(45deg, #ff4e50, #f9d423); /* Gradient color */
+      font-size: 3em;
+      background: linear-gradient(45deg, #ff4e50, #f9d423);
       -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent; /* Makes the gradient visible */
-      animation: glow 1.5s ease-in-out infinite alternate; /* Glowing effect */
+      -webkit-text-fill-color: transparent;
+      animation: glow 1.5s ease-in-out infinite alternate;
     }
 
-    /* Countdown Styling */
+    /* Styling for the countdown timer */
     h1 label#countdown {
-      font-size: 2.5em; /* Slightly smaller font size for countdown */
-      color: #00e676; /* Bright green color for the countdown */
-      animation: pulse 1s infinite; /* Pulsating effect */
+      font-size: 2.5em;
+      color: #00e676;
+      animation: pulse 1s infinite;
     }
 
-    /* Glow Animation */
+    /* Glow effect animation */
     @keyframes glow {
       from {
         text-shadow: 0 0 10px #ff4e50, 0 0 20px #ff4e50, 0 0 30px #ff4e50, 0 0 40px #f9d423, 0 0 70px #f9d423, 0 0 80px #f9d423, 0 0 100px #f9d423;
@@ -57,7 +80,7 @@
       }
     }
 
-    /* Pulse Animation */
+    /* Pulse effect animation */
     @keyframes pulse {
       0% {
         transform: scale(1);
@@ -72,37 +95,51 @@
         text-shadow: 0 0 5px #00e676, 0 0 10px #00e676, 0 0 15px #00e676;
       }
     }
-
   </style>
 </head>
 <body>
 
-<h1><label id="customText">Server Launch</label><br>
-<label id="countdown"></label></h1>
+  <!-- Left side element with gradient animation -->
+  <div class="side"></div>
 
-<script>
-  
-  const countDownDate = new Date();
-  countDownDate.setHours(21, 0, 0, 0);
+  <!-- Central container with the countdown text -->
+  <div class="container">
+    <h1>
+      <label id="customText">Server Launch</label><br>
+      <label id="countdown"></label>
+    </h1>
+  </div>
 
-  
-  const countdownElement = document.getElementById('countdown');
-  setInterval(function() {
-    const now = new Date().getTime();
-    const distance = countDownDate - now;
+  <!-- Right side element with gradient animation -->
+  <div class="side"></div>
 
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  <script>
+    // Set the countdown date and time
+    const countDownDate = new Date();
+    countDownDate.setHours(20, 0, 0, 0);
 
-    countdownElement.innerHTML = `${hours}h ${minutes}m ${seconds}s`; 
+    // Get the countdown element
+    const countdownElement = document.getElementById('countdown');
 
-    
-    if (distance < 0) {
-      countdownElement.innerHTML = "It's time!";
-    }
-  }, 1000);
-</script>
+    // Update the countdown every second
+    setInterval(function() {
+      const now = new Date().getTime();
+      const distance = countDownDate - now;
+
+      // Calculate hours, minutes, and seconds
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      // Display the countdown
+      countdownElement.innerHTML = `${hours}h ${minutes}m ${seconds}s`;
+
+      // If the countdown is over
+      if (distance < 0) {
+        countdownElement.innerHTML = "It's time!";
+      }
+    }, 1000);
+  </script>
 
 </body>
 </html>
