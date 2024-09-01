@@ -5,22 +5,74 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Countdown</title>
   <style>
+    /* Reset default margin */
+    body {
+      margin: 0; 
+    }
+
+    /* Background styling */
     body {
       background: url('MPLASONLINELOGO.png') no-repeat center center fixed;
-      background-size: auto;
+      background-size: auto; /* Shows the entire image without cropping */
       background-position: center;
       background-attachment: fixed;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh; /* Add this to ensure the background covers the entire viewport */
-      margin: 0; /* Remove default margin */
+      height: 100vh; 
     }
 
-    h1 {
-      color: white; /* Add text color for better visibility */
+    /* Text Styling */
+    h1, label {
+      font-family: 'Arial', sans-serif;
+      color: white;
+      text-align: center;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Adds shadow for depth */
     }
+
+    /* Custom Gradient Text for the Header */
+    h1 label#customText {
+      font-size: 3em; /* Bigger font for the header */
+      background: linear-gradient(45deg, #ff4e50, #f9d423); /* Gradient color */
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent; /* Makes the gradient visible */
+      animation: glow 1.5s ease-in-out infinite alternate; /* Glowing effect */
+    }
+
+    /* Countdown Styling */
+    h1 label#countdown {
+      font-size: 2.5em; /* Slightly smaller font size for countdown */
+      color: #00e676; /* Bright green color for the countdown */
+      animation: pulse 1s infinite; /* Pulsating effect */
+    }
+
+    /* Glow Animation */
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px #ff4e50, 0 0 20px #ff4e50, 0 0 30px #ff4e50, 0 0 40px #f9d423, 0 0 70px #f9d423, 0 0 80px #f9d423, 0 0 100px #f9d423;
+      }
+      to {
+        text-shadow: 0 0 20px #ff4e50, 0 0 30px #ff4e50, 0 0 40px #ff4e50, 0 0 50px #f9d423, 0 0 80px #f9d423, 0 0 90px #f9d423, 0 0 120px #f9d423;
+      }
+    }
+
+    /* Pulse Animation */
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        text-shadow: 0 0 5px #00e676, 0 0 10px #00e676, 0 0 15px #00e676;
+      }
+      50% {
+        transform: scale(1.05);
+        text-shadow: 0 0 10px #00e676, 0 0 20px #00e676, 0 0 25px #00e676;
+      }
+      100% {
+        transform: scale(1);
+        text-shadow: 0 0 5px #00e676, 0 0 10px #00e676, 0 0 15px #00e676;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -29,11 +81,11 @@
 <label id="countdown"></label></h1>
 
 <script>
-  // Set the date and time for the countdown (6:15 PM today)
+  
   const countDownDate = new Date();
-  countDownDate.setHours(20, 0, 0, 0);
+  countDownDate.setHours(21, 0, 0, 0);
 
-  // Update the countdown every 1 second
+  
   const countdownElement = document.getElementById('countdown');
   setInterval(function() {
     const now = new Date().getTime();
@@ -43,9 +95,9 @@
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    countdownElement.innerHTML = `${hours}h ${minutes}m ${seconds}s`; // Fix template literal
+    countdownElement.innerHTML = `${hours}h ${minutes}m ${seconds}s`; 
 
-    // If the countdown is over, display a message
+    
     if (distance < 0) {
       countdownElement.innerHTML = "It's time!";
     }
