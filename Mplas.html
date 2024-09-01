@@ -8,7 +8,7 @@
     /* Styling for the entire body */
     body {
       background: url('MPLASONLINELOGO.png') no-repeat center center fixed;
-      background-size: auto;
+      background-size: contain;
       background-position: center;
       background-attachment: fixed;
       display: flex;
@@ -52,6 +52,7 @@
       color: white;
       text-align: center;
       text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+      margin: 0; /* Remove default margin */
     }
 
     /* Styling for the custom text (Server Launch) */
@@ -95,6 +96,31 @@
         text-shadow: 0 0 5px #00e676, 0 0 10px #00e676, 0 0 15px #00e676;
       }
     }
+
+    /* Media query for mobile devices */
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .container {
+        width: 90%;
+        padding: 20px;
+      }
+
+      .side {
+        display: none; /* Hide side elements on small screens */
+      }
+
+      h1 label#customText {
+        font-size: 2em;
+      }
+
+      h1 label#countdown {
+        font-size: 1.8em;
+      }
+    }
   </style>
 </head>
 <body>
@@ -116,7 +142,7 @@
   <script>
     // Set the countdown date and time
     const countDownDate = new Date();
-    countDownDate.setHours(21, 0, 0, 0);
+    countDownDate.setHours(20, 0, 0, 0);
 
     // Get the countdown element
     const countdownElement = document.getElementById('countdown');
