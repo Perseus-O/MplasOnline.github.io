@@ -6,7 +6,7 @@
   <title>Countdown</title>
   <style>
     body {
-      background: url('minecraftpic.jpg') no-repeat center center fixed;
+      background: url('MPLASONLINELOGO') no-repeat center center fixed;
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -14,12 +14,12 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh; /* Add this to ensure the background covers the entire viewport */
-      margin: 0; /* Remove default margin */
+      height: 100vh; 
+      margin: 0; 
     }
 
     h1 {
-      color: white; /* Add text color for better visibility */
+      color: white; 
     }
   </style>
 </head>
@@ -29,11 +29,11 @@
 <label id="countdown"></label></h1>
 
 <script>
-  // Set the date and time for the countdown (6:15 PM today)
+  
   const countDownDate = new Date();
-  countDownDate.setHours(17, 0, 0, 0);
+  countDownDate.setHours(11, 0, 0, 0);
 
-  // Update the countdown every 1 second
+  
   const countdownElement = document.getElementById('countdown');
   setInterval(function() {
     const now = new Date().getTime();
@@ -43,9 +43,9 @@
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    countdownElement.innerHTML = `${hours}h ${minutes}m ${seconds}s`; // Fix template literal
+    countdownElement.innerHTML = `${hours}h ${minutes}m ${seconds}s`; 
 
-    // If the countdown is over, display a message
+    
     if (distance < 0) {
       countdownElement.innerHTML = "It's time!";
     }
